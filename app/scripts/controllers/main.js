@@ -20,8 +20,11 @@ angular.module('gitSwanApp')
 
 	$scope.errors = null;
 
-	$scope.itemsPerPage = 10;
+	$scope.itemsPerPage = 5;
+
 	$scope.currentPage = 1;
+
+	$scope.showAll = false;
 
 	var clearRepo = function(){
 		$scope.selectedRepo = null;

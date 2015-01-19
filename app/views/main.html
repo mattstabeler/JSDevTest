@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="col-xs-8">
+    <div class="col-xs-7">
       <section class="col-md-12">
         <div class="alert alert-danger" ng-if="error">{{error.message}}</div>
         <form ng-submit="searchTerm && doSearch()">
@@ -18,7 +18,6 @@
                   <tr>
                     <th>User</th>
                     <th>Repository</th>
-                    <th></th>
                   </tr>
               </thead>
               <tbody>
@@ -26,20 +25,53 @@
                     <td>{{repo.name}}</td>
                     <td>{{repo.owner.login}}</td>
 
-                    <td><button class="btn btn-success pull-right" ng-click="moreDetails(repo)">More</button></td>
                   </tr>
               </tbody>
               <tfoot>
-                <tr ng-if="searchResults.length == 0"><td colspan="3">No Results</td></tr>
+                <tr ng-if="searchResults.length == 0"><td colspan="2">No Results</td></tr>
+                <tr ng-if="searchResults.length > 0">
+                  <td colspan="2">Pagination here... Current Page {{currentPage}}, Per Page: {{itemsPerPage}}</td>
+                </tr>
               </tfoot>
           </table>
+
       </section>
 
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-5">
         <section ng-if="selectedRepo">
+          <span class="col-xs-4 pull-right"><img src="{{selectedRepo.owner.avatar_url}}" alt="{{selectedRepo.owner.login}}'s Avatar" class="img-circle img-responsive"></span>
           <h1>{{selectedRepo.name}}</h1>
-          <pre>{{selectedRepo | json}}</pre>
+          <p>
+            {{selectedRepo.description}}
+          </p>
+          <strong>{{selectedRepo.owner.login}}</strong>
+          <em><a href="{{selectedRepo.url}}">{{selectedRepo.name}} on Github</a></em>
+
+          <table ng-if="showAll" class="table table-striped">
+            <thead>
+              <tr>
+                  <th>Attr</th>
+                  <th>Val</th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr ng-repeat="(key, value) in selectedRepo">
+                  <td>{{key}}</td>
+                  <td>{{value}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="well well-sm">
+            <i class="fa fa-code-fork text-success"></i>{{selectedRepo.forks_count}}
+            <i class="fa fa-star text-warning"></i>{{selectedRepo.stargazers_count}}
+            <i class="fa fa-exclamation-circle text-danger"></i> {{selectedRepo.open_issues_count}} Issues
+          </div>
+          <button class="btn btn-success pull-right" ng-click="moreDetails(selectedRepo)">More details</button>
+
+          <!-- <pre>{{selectedRepo | json}}</pre> -->
+
         </section>
     </div>
 
