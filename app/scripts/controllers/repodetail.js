@@ -8,10 +8,8 @@
  * Controller of the gitSwanApp
  */
 angular.module('gitSwanApp')
-  .controller('RepodetailCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('RepodetailCtrl', ['$scope', 'repoIssues', function ($scope, repoIssues) {
+  	
+  	$scope.repoIssues = repoIssues;
+  	
+  }]);

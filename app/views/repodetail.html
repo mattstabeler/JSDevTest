@@ -1,1 +1,6 @@
-<p>This is the repoDetail view.</p>
+
+
+<div class="well" ng-repeat="issue in repoIssues.items">
+	<h2>{{issue.title}}</h2>
+	<p>{{issue.body}}</p>
+</div>

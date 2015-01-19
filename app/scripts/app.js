@@ -27,7 +27,14 @@ angular
       })
       .when('/repoDetail/:username/:repo', {
         templateUrl: 'views/repodetail.html',
-        controller: 'RepodetailCtrl'
+        controller: 'RepodetailCtrl',
+        resolve : {
+          repoIssues: function($route, gitAPIService){
+
+              return gitAPIService.searchIssues($route.current.params.username, $route.current.params.repo);
+              // return ["test", "test"];
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'

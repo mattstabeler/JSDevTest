@@ -27,6 +27,14 @@ angular.module('gitSwanApp')
     		return $resource(baseUrl + path).get(params).$promise;
 
     	}
+    	api.searchIssues = function(userName, repoName){
+    		var path = 'search/issues'
+
+    		var params = {
+    			q : 'repo:' + userName + "/"+  repoName
+    		}
+    		return $resource(baseUrl + path).get(params).$promise;
+    	}
 
   		return api;
   
