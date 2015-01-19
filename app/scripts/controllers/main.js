@@ -8,13 +8,13 @@
  * Controller of the gitSwanApp
  */
 angular.module('gitSwanApp')
-  .controller('MainCtrl', ['$scope', 'gitAPIService', function ($scope, gitAPIService) {
+  .controller('MainCtrl', ['$scope', '$location', 'gitAPIService',  function ($scope, $location, gitAPIService) {
 
 	$scope.searchTerm = 'bootstrap';
 
 	$scope.selectedRepo = null;
 
-	$scope.searchResults = [];
+	$scope.searchResults = null;
 	
 	$scope.loading = false;
 
@@ -35,7 +35,7 @@ angular.module('gitSwanApp')
 			$scope.searchResults = success.items;
 		}, function(error){
 			$scope.loading = false;
-			$scope.error = error;
+			$scope.error = error.data;
 		});
 
 	}
@@ -47,6 +47,10 @@ angular.module('gitSwanApp')
 		}else{
 			$scope.selectedRepo = repo;
 		}
+	}
+
+	$scope.moreDetails = function(repo){
+		$location.path("/repoDetail/" + repo.owner.login + "/" + repo.name);
 	}
 
 	$scope.clearRepo = clearRepo;
