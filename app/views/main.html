@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="col-xs-7">
+    <div class="col-xs-8">
       <section class="col-md-12">
         <div class="alert alert-danger" ng-if="error">{{error.message}}</div>
         <form ng-submit="searchTerm && doSearch()">
@@ -16,8 +16,8 @@
           <table ng-if="searchResults" class="table table-striped table-hover">
               <thead ng-if="searchResults.length > 0">
                   <tr>
-                    <th>User</th>
                     <th>Repository</th>
+                    <th>User</th>
                   </tr>
               </thead>
               <tbody>
@@ -36,7 +36,7 @@
                     ng-model="currentPage" 
                     ng-change="pageChanged()"
                     boundary-links="true"
-                    max-size="5"
+                    max-size="3"
                     >
                      
                    </pagination>
@@ -48,10 +48,10 @@
       </section>
 
     </div>
-    <div class="col-xs-5">
+    <div class="col-xs-4">
         <section ng-if="selectedRepo">
           <span class="col-xs-4 pull-right"><img src="{{selectedRepo.owner.avatar_url}}" alt="{{selectedRepo.owner.login}}'s Avatar" class="img-circle img-responsive"></span>
-          <h1>{{selectedRepo.name}}</h1>
+          <h3>{{selectedRepo.name}}</h3>
           <p>
             {{selectedRepo.description}}
           </p>
@@ -72,13 +72,13 @@
               </tr>
             </tbody>
           </table>
-
+          <div class="clearfix"></div>
           <div class="well well-sm">
             <i class="fa fa-code-fork text-success"></i>{{selectedRepo.forks_count}}
             <i class="fa fa-star text-warning"></i>{{selectedRepo.stargazers_count}}
             <i class="fa fa-exclamation-circle text-danger"></i> {{selectedRepo.open_issues_count}} Issues
           </div>
-          <button class="btn btn-success pull-right" ng-click="moreDetails(selectedRepo)">More details</button>
+          <button class="btn btn-success pull-right" ng-click="moreDetails(selectedRepo)">Issues</button>
 
           <!-- <pre>{{selectedRepo | json}}</pre> -->
 

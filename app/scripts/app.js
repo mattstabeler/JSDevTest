@@ -31,7 +31,6 @@ angular
         controller: 'RepodetailCtrl',
         resolve : {
           repoIssues: function($route, gitAPIService){
-
               return gitAPIService.searchIssues($route.current.params.username, $route.current.params.repo);
               // return ["test", "test"];
           }

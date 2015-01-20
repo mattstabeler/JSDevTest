@@ -1,6 +1,47 @@
 
+<div class="containter">
+	<div ng-repeat="issue in repoIssues" class="panel panel-default">
+	  <div class="panel-heading"><a href="{{issue.html_url}}">{{issue.title}}</a> <span class="label pull-right" ng-class="{'label-warning' : issue.state == 'open', 'label-success' : issue.state == 'closed', 'label-info' : issue.state == 'all'}">{{issue.state}} <i ng-class="{'fa fa-lock' : issue.locked, 'fa fa-unlock' : !issue.locked}"></i></span></div>
+	  <div class="panel-body">
 
-<div class="well" ng-repeat="issue in repoIssues.items">
-	<h2>{{issue.title}}</h2>
-	<p>{{issue.body}}</p>
+	  	<div class="col-xs-12 col-md-6">
+		    <pre>{{issue.body | nvl:'No Body'}}</pre>
+		    <span ng-repeat="label in issue.labels">
+				<a class="label label-info" href="{{label.url}}">{{label.name}}</a>
+			</span>
+			<ul class="list-unstyled">
+				<li>Assigned to <a class="label label-info" href="{{issue.assignee.html_url}}">{{issue.assignee.login | nvl:'Nobody'}}</a></li>
+				<li>Created at <em>{{issue.created_at | date:mediumdate}}</em></li>
+				<li>Updated at <em>{{issue.updated_at | date:mediumdate | nvl:'Never'}}</em></li>
+				<li>Closed at <em>{{issue.closed_at | date:mediumdate | nvl:'Never'}}</em></li>
+				<li>Assigned to <a class="label label-info" href="{{issue.assignee.html_url}}">{{issue.assignee.login}}</a></li>
+			</ul>
+	  	</div>
+		    <div class="col-xs-6 col-md-3">
+	    	<ul class="list-unstyled">
+	    		<li>
+	    			Comments <label class="badge badge-info">{{issue.comments}}</label>
+	    		</li>
+	    		<li ng-if="issue.pull_request">
+	    	    	<a href="{{issue.pull_request.html_url}}">Pull Request</a>
+	    		</li>
+	    		<li>
+	    	    	Score <label class="badge badge-info">{{issue.score}}</label></span>
+	    		</li>
+	    	</ul>
+
+	    </div>
+	    <div class="col-xs-6 col-md-3">
+	    	<user-details user="issue.user"></user-details>	
+	    </div>
+	  </div>
+	</div>
+   <pagination 
+    total-items="totalItems" 
+    ng-model="currentPage" 
+    ng-change="pageChanged()"
+    boundary-links="true"
+    max-size="5"
+    >
+
 </div>

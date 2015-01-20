@@ -32,10 +32,10 @@ angular.module('gitSwanApp')
     	};
     	api.searchIssues = function(userName, repoName, page, perPage){
     		var path = 'search/issues';
-
+            /*jshint camelcase: false */
     		var params = {
     			q : 'repo:' + userName + '/' +  repoName,
-                per_page : perPage || 3,
+                per_page : perPage || 5,
                 page : page || 1
     		};
     		return $resource(baseUrl + path).get(params).$promise;
