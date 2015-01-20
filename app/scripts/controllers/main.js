@@ -21,6 +21,7 @@ angular.module('gitSwanApp')
 	$scope.errors = null;
 
 	$scope.itemsPerPage = 5;
+	$scope.totalItems = 0;
 
 	$scope.currentPage = 1;
 
@@ -28,33 +29,41 @@ angular.module('gitSwanApp')
 
 	var clearRepo = function(){
 		$scope.selectedRepo = null;
-	}
+	};
 
-	$scope.doSearch = function(){
 
+	var doSearch = function(){
 		$scope.loading = true;
 		gitAPIService.searchRepositories($scope.searchTerm, $scope.currentPage, $scope.itemsPerPage).then(function(success){
 			$scope.loading = false;
+			/*jshint camelcase: false */
+			$scope.totalItems = success.total_count;
 			$scope.searchResults = success.items;
 		}, function(error){
 			$scope.loading = false;
 			$scope.error = error.data;
 		});
 
-	}
+	};
+
+	$scope.doSearch = doSearch;
+
+	$scope.pageChanged = function(){
+		doSearch();
+	};
 
 	$scope.showRepo = function(repo){
 
-		if($scope.selectedRepo && repo.id == $scope.selectedRepo.id){
+		if($scope.selectedRepo && repo.id === $scope.selectedRepo.id){
 			clearRepo();
 		}else{
 			$scope.selectedRepo = repo;
 		}
-	}
+	};
 
 	$scope.moreDetails = function(repo){
-		$location.path("/repoDetail/" + repo.owner.login + "/" + repo.name);
-	}
+		$location.path('/repoDetail/' + repo.owner.login + '/' + repo.name);
+	};
 
 	$scope.clearRepo = clearRepo;
 
