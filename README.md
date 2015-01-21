@@ -1,7 +1,7 @@
 # JSDevTest
 Dev example application
 
-[View minified/uglified version on GH Pages](https://github.com/mattstabeler/JSDevTest)
+[View minified/uglified version on GH Pages](https://mattstabeler.github.io/JSDevTest)
 
 
 First, install yeoman
