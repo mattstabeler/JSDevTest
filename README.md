@@ -1,6 +1,9 @@
 # JSDevTest
 Dev example application
 
+[View minified/uglified version on GH Pages](https://github.com/mattstabeler/JSDevTest)
+
+
 First, install yeoman
 
     npm install -g yo grunt-cli gulp
@@ -21,4 +24,4 @@ To run the tests
 To build the project (minify, uglify etc)
 
     grunt
-
+    
